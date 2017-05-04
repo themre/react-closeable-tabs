@@ -15,7 +15,7 @@ To start using closeable tabs, you need to pass `data` prop which is an array of
 If you don't want tab to be closeable (not to have X to close it), you can set `closeable` property to `false`.
 
 ## Example
-```
+```JSX
 import React from 'react';
 import { render } from 'react-dom';
 
