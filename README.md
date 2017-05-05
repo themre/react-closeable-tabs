@@ -97,7 +97,7 @@ render(<Demo />, document.querySelector('#demo'));
 ## API
 
 | Prop        | Type           | Default  | Description |
-| ------------- |:-------------:| -----:| ---------:|
+| ------------- |:-------------:| -----:| :--------|
 | data     | Array | [] | Array of objects that need to be in the following format: `{tab: 'Tab text', component: <YourComponent />, id: 'uniqueId', closeable: true}`|
 | activeIndex      | Number      |   0 | Define which tab is active by default |
 | identifier | String      |    id | You can define new key for unique ID in your data object |
