@@ -101,7 +101,7 @@ render(<Demo />, document.querySelector('#demo'));
 | data     | Array | [] | Array of objects that need to be in the following format: `{tab: 'Tab text', component: <YourComponent />, id: 'uniqueId', closeable: true}`|
 | activeIndex      | Number      |   0 | Define which tab is active by default |
 | identifier | String      |    id | You can define new key for unique ID in your data object |
-| onCloseTab | Function | null | Callback function that is invoked after clicking close tab. It passes id of closed object tab |
-| onTabClick | Function | null | Callback function that is invoked after clicking tab. It passes id of clicked tab |
-| onBeforeTabClick | Function | null | Callback function that is invoked before clicking tab. It passes id of clicked tab |
+| onCloseTab | Function(id, newIndex) | null | Callback function that is invoked after clicking close tab. It passes id of closed object tab |
+| onTabClick | Function(id, index) | null | Callback function that is invoked after clicking tab. It passes id of clicked tab |
+| onBeforeTabClick | Function(id, newIndex, oldIndex) | null | Callback function that is invoked before clicking tab. It passes id of clicked tab |
 | tabPanelColor | String | #f2f2f2 | Background of tabPanel holder |

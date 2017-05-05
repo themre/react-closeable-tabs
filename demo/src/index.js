@@ -9,7 +9,8 @@ class Demo extends React.Component {
       {
         tab: 'List',
         component: <div><h1>Your list</h1></div>,
-        id: 0
+        id: 0,
+        closeable: false
       },
       {
         tab: 'Item detail 1',
@@ -56,11 +57,13 @@ class Demo extends React.Component {
         <CloseableTabs
           tabPanelColor='lightgray'
           data={this.state.data}
-          onCloseTab={id => {
+          onCloseTab={(id, newIndex) => {
             this.setState({
               data: this.state.data.filter(item => item.id !== id),
+              activeIndex: newIndex
             });
           }}
+          activeIndex={this.state.activeIndex}
         />
       </div>
     );
