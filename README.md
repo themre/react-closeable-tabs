@@ -3,6 +3,12 @@
 Simple Closeable tabs with React. 
 
 ## Usage
+
+First install package
+```
+npm i -S react-closeable-tabs (yarn add react-closeable-tabs)
+```
+
 To start using closeable tabs, you need to pass `data` prop which is an array of objects. Each object has the following properties:
 ```
 {
@@ -19,7 +25,7 @@ If you don't want tab to be closeable (not to have X to close it), you can set `
 import React from 'react';
 import { render } from 'react-dom';
 
-import CloseableTabs from '../../src';
+import CloseableTabs from 'react-closeable-tabs';
 
 class Demo extends React.Component {
   state = {
