@@ -94,7 +94,7 @@ class ReactCloseableTabs extends Component {
   render() {
     const { data, activeIndex } = this.state;
     return (
-      <CloseableTabs>
+      <CloseableTabs className={this.props.mainClassName || ''}>
         <TabPanel tabPanelColor={this.props.tabPanelColor} className={this.props.tabPanelClass || ''}>
           {data.map((item, i) => {
             return (
