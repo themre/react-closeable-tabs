@@ -80,11 +80,13 @@ class Demo extends React.Component {
         <CloseableTabs
           tabPanelColor='lightgray'
           data={this.state.data}
-          onCloseTab={id => {
+          onCloseTab={(id, newIndex) => {
             this.setState({
               data: this.state.data.filter(item => item.id !== id),
+              activeIndex: newIndex
             });
           }}
+          activeIndex={this.state.activeIndex}
         />
       </div>
     );

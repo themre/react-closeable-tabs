@@ -1,6 +1,6 @@
 {
   "name": "react-closeable-tabs",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Simple closeable tabs. Add or remove tabs",
   "main": "lib/index.js",
   "module": "es/index.js",
