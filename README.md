@@ -107,5 +107,8 @@ render(<Demo />, document.querySelector('#demo'));
 | onTabClick | Function(id, index) | null | Callback function that is invoked after clicking tab. It passes id of clicked tab |
 | onBeforeTabClick | Function(id, newIndex, oldIndex) | null | Callback function that is invoked before clicking tab. It passes id of clicked tab |
 | tabPanelColor | String | #f2f2f2 | Background of tabPanel holder |
-| renderClose | Function | 'X' | Custom conten render of close button |
+| renderClose | Function | 'X' | Custom content render of close button |
 | closeTitle | String | 'Close tab' | Close button tooltip text |
+| mainClassName | String | '' | Option to add additional class to main wrapping panel |
+| tabPanelClass | String | '' | Option to add additional class to tabPanel |
+| tabContentClass | String | '' | Option to add additional class to contentPanel |
