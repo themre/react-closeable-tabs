@@ -104,7 +104,7 @@ render(<Demo />, document.querySelector('#demo'));
 | activeIndex      | Number      |   0 | Define which tab is active by default |
 | identifier | String      |    id | You can define new key for unique ID in your data object |
 | onCloseTab | Function(id, newIndex) | null | Callback function that is invoked after clicking close tab. It passes id of closed object tab |
-| onTabClick | Function(id, index) | null | Callback function that is invoked after clicking tab. It passes id of clicked tab |
+| onTabClick | Function(id, newIndex, oldIndex) | null | Callback function that is invoked after clicking tab. It passes id of clicked tab |
 | onBeforeTabClick | Function(id, newIndex, oldIndex) | null | Callback function that is invoked before clicking tab. It passes id of clicked tab |
 | tabPanelColor | String | #f2f2f2 | Background of tabPanel holder |
 | renderClose | Function | 'X' | Custom content render of close button |

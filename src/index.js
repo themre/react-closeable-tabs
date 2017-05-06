@@ -70,9 +70,9 @@ class ReactCloseableTabs extends Component {
   }
 
   handleTabClick = (id, index) => {
-    this.props.onBeforeTabClick && this.props.onBeforeTabClick(id, newIndex, this.state.activeIndex);
+    this.props.onBeforeTabClick && this.props.onBeforeTabClick(id, index, this.state.activeIndex);
     this.setState({ activeIndex: index }, () => {
-      this.props.onTabClick && this.props.onTabClick(id, newIndex, this.state.activeIndex);
+      this.props.onTabClick && this.props.onTabClick(id, index, this.state.activeIndex);
     });
   };
 
