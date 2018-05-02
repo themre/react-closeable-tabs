@@ -99,7 +99,7 @@ class ReactCloseableTabs extends Component {
           {data.map((item, i) => {
             return (
               <span
-                className={i === activeIndex && 'active'}
+                className={i === activeIndex ? 'active' : ''}
                 onClick={() => this.handleTabClick(item.id, i)}
                 key={i}
               >
