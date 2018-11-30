@@ -54,6 +54,7 @@ class Demo extends React.Component {
     return (
       <div>
         <button onClick={this.addItem}>Add item</button>
+        <button onClick={() => this.setState({activeIndex: 0})}>Reset index</button>
         <CloseableTabs
           tabPanelColor='lightgray'
           data={this.state.data}
@@ -63,6 +64,7 @@ class Demo extends React.Component {
               activeIndex: newIndex
             });
           }}
+          noTabUnmount
           activeIndex={this.state.activeIndex}
         />
       </div>

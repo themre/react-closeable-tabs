@@ -112,3 +112,4 @@ render(<Demo />, document.querySelector('#demo'));
 | mainClassName | String | '' | Option to add additional class to main wrapping panel |
 | tabPanelClass | String | '' | Option to add additional class to tabPanel |
 | tabContentClass | String | '' | Option to add additional class to contentPanel |
+| noTabUnmount | boolean | false | if true, all tabs will be mounted on start, will be toggled with CSS display (since version 1.1.0) |
