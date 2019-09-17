@@ -97,11 +97,16 @@ class ReactCloseableTabs extends Component {
     ]
     const newIndex =
       activeId === id ? this.state.activeIndex - 1 : this.state.activeIndex
-    this.props.onCloseTab && this.props.onCloseTab(id, newIndex)
-    this.setState({
-      data: this.state.data.filter(item => item.id !== id),
-      activeIndex: newIndex
-    })
+    let canClose = true;
+    if (this.props.onCloseTab) {
+      canClose = this.props.onCloseTab(id, newIndex)
+    }
+    if (canClose !== false) {
+      this.setState({
+        data: this.state.data.filter(item => item.id !== id),
+        activeIndex: newIndex
+      })
+    }
   }
 
   render() {
