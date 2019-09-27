@@ -71,8 +71,9 @@ class ReactCloseableTabs extends Component {
   }
 
   componentWillMount() {
-    const { domActived, activeIndex, data } = this.state;
-    domActived[activeIndex] = data[activeIndex];
+    const { domActived, activeIndex, data, identifier } = this.state;
+    let currentId = data[activeIndex][identifier];
+    domActived[currentId] = data[activeIndex];
     this.setState({ domActived });
   }
 
@@ -89,10 +90,11 @@ class ReactCloseableTabs extends Component {
   }
 
   handleTabClick = (id, index) => {
-    const { domActived, data } = this.state;
+    const { domActived, data, identifier } = this.state;
     this.props.onBeforeTabClick &&
       this.props.onBeforeTabClick(id, index, this.state.activeIndex)
-    domActived[index] = data[index];
+    let currentId = data[index][identifier];
+    domActived[currentId] = data[index];
     this.setState({ activeIndex: index, domActived }, () => {
       this.props.onTabClick &&
         this.props.onTabClick(id, index, this.state.activeIndex)
@@ -105,22 +107,28 @@ class ReactCloseableTabs extends Component {
       this.state.identifier
     ]
     const newIndex =
-      activeId === id ? this.state.activeIndex - 1 : this.state.activeIndex
+      activeId >= id ? this.state.activeIndex - 1 : this.state.activeIndex
     let canClose = true;
     if (this.props.onCloseTab) {
       canClose = this.props.onCloseTab(id, newIndex)
     }
     if (canClose !== false) {
-      this.setState({
-        data: this.state.data.filter(item => item.id !== id),
-        activeIndex: newIndex
-      })
+      const { data, domActived, identifier } = this.state;
+      data.filter(item => item.id !== id);
+      const nextId = data[newIndex][identifier];
+      if (domActived[id]) {
+        delete domActived[id];
+      }
+      if (!domActived[nextId]) {
+        domActived[nextId] = data[newIndex]
+      }
+      this.setState({ data, activeIndex: newIndex, domActived })
     }
   }
 
   render() {
     const { noTabUnmount } = this.props
-    const { domActived, activeIndex, data } = this.state
+    const { domActived, activeIndex, data, identifier } = this.state
     return (
       <CloseableTabs className={this.props.mainClassName || ''}>
         <TabPanel
@@ -154,7 +162,7 @@ class ReactCloseableTabs extends Component {
               return (
                 <div
                   key={item.id || index}
-                  style={{ display: index === activeIndex ? 'block' : 'none' }}
+                  style={{ display: item.id === data[activeIndex][identifier] ? 'block' : 'none' }}
                 >
                   {item.component}
                 </div>
