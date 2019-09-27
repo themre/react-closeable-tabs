@@ -78,10 +78,12 @@ class ReactCloseableTabs extends Component {
   }
 
   componentWillReceiveProps(nextProps) {
+    const { domActived } = this.state;
+    const { data, activeIndex } = nextProps;
+    let currentId = data[activeIndex].id;
     if (nextProps.data) {
-      const newState = {
-        data: nextProps.data
-      }
+      domActived[currentId] = data[activeIndex];
+      const newState = { data, domActived }
       if (Number.isInteger(nextProps.activeIndex)) {
         newState.activeIndex = nextProps.activeIndex
       }
@@ -116,11 +118,11 @@ class ReactCloseableTabs extends Component {
       const { data, domActived, identifier } = this.state;
       data.filter(item => item.id !== id);
       const nextId = data[newIndex][identifier];
-      if (domActived[id]) {
-        delete domActived[id];
-      }
       if (!domActived[nextId]) {
         domActived[nextId] = data[newIndex]
+      }
+      if (domActived[id]) {
+        delete domActived[id];
       }
       this.setState({ data, activeIndex: newIndex, domActived })
     }
