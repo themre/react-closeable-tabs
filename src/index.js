@@ -66,7 +66,14 @@ class ReactCloseableTabs extends Component {
   state = {
     data: this.props.data,
     activeIndex: this.props.activeIndex || 0,
-    identifier: this.props.identifier || 'id'
+    identifier: this.props.identifier || 'id',
+    domActived: {}
+  }
+
+  componentWillMount() {
+    const { domActived, activeIndex, data } = this.state;
+    domActived[activeIndex] = data[activeIndex];
+    this.setState({ domActived });
   }
 
   componentWillReceiveProps(nextProps) {
@@ -82,9 +89,11 @@ class ReactCloseableTabs extends Component {
   }
 
   handleTabClick = (id, index) => {
+    const { domActived, data } = this.state;
     this.props.onBeforeTabClick &&
       this.props.onBeforeTabClick(id, index, this.state.activeIndex)
-    this.setState({ activeIndex: index }, () => {
+    domActived[index] = data[index];
+    this.setState({ activeIndex: index, domActived }, () => {
       this.props.onTabClick &&
         this.props.onTabClick(id, index, this.state.activeIndex)
     })
@@ -111,7 +120,7 @@ class ReactCloseableTabs extends Component {
 
   render() {
     const { noTabUnmount } = this.props
-    const { data, activeIndex } = this.state
+    const { domActived, activeIndex, data } = this.state
     return (
       <CloseableTabs className={this.props.mainClassName || ''}>
         <TabPanel
@@ -140,18 +149,18 @@ class ReactCloseableTabs extends Component {
           })}
         </TabPanel>
         <TabContent className={this.props.tabContentClass || ''}>
-          {noTabUnmount
-            ? data.map((item, index) => (
+          {
+            Object.values(domActived).map((item, index) => {
+              return (
                 <div
                   key={item.id || index}
                   style={{ display: index === activeIndex ? 'block' : 'none' }}
                 >
                   {item.component}
                 </div>
-              ))
-            : data[activeIndex]
-            ? data[activeIndex].component
-            : null}
+              )
+            })
+          }
         </TabContent>
       </CloseableTabs>
     )
