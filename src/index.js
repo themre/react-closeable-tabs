@@ -159,8 +159,8 @@ class ReactCloseableTabs extends Component {
           })}
         </TabPanel>
         <TabContent className={this.props.tabContentClass || ''}>
-          {
-            Object.values(domActived).map((item, index) => {
+          {noTabUnmount
+            ? Object.values(domActived).map((item, index) => {
               return (
                 <div
                   key={item.id || index}
@@ -169,7 +169,9 @@ class ReactCloseableTabs extends Component {
                   {item.component}
                 </div>
               )
-            })
+            }) : data[activeIndex]
+              ? data[activeIndex].component
+              : null
           }
         </TabContent>
       </CloseableTabs>
