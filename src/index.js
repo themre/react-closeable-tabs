@@ -69,12 +69,22 @@ class ReactCloseableTabs extends Component {
     identifier: this.props.identifier || 'id',
     domActived: {}
   }
-
   componentWillMount() {
     const { domActived, activeIndex, data, identifier } = this.state;
+    if (!data[activeIndex]) return;
     let currentId = data[activeIndex][identifier];
     domActived[currentId] = data[activeIndex];
     this.setState({ domActived });
+  }
+
+  componentDidUpdate() {
+    const { data, domActived } = this.state;
+    const arr = Object.values(domActived).filter((item) => {
+      return Object.values(data).map(item => (item.id)).indexOf(item.id) === -1
+    })
+    if (arr.length <= 0) return false;
+    delete domActived[arr[0].id];
+    this.setState({ domActived })
   }
 
   componentWillReceiveProps(nextProps) {

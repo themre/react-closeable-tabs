@@ -9,29 +9,52 @@ class Demo extends React.Component {
       {
         tab: 'List',
         component: <div><h1>Your list</h1></div>,
-        id: 0,
+        id: 6,
         closeable: false
       },
       {
         tab: 'Item detail 1',
         component: <div>Item details for 1</div>,
-        id: 1,
-        closeable: true
-      },
-      {
-        tab: 'Item detail 2',
-        component: <div>Item details for 2</div>,
-        id: 2,
-        closeable: true
-      },
-      {
-        tab: 'Item detail 3',
-        component: <div>Item details for 3</div>,
-        id: 3,
+        id: 7,
         closeable: true
       }
-    ]
+    ],
+    activeIndex: 1
   };
+
+  componentDidMount() {
+    setTimeout(() => {
+      this.setState({
+        data: [
+          {
+            tab: 'List',
+            component: <div><h1>Your list</h1></div>,
+            id: 0,
+            closeable: false
+          },
+          {
+            tab: 'Item detail 1',
+            component: <div>Item details for 1</div>,
+            id: 1,
+            closeable: true
+          },
+          {
+            tab: 'Item detail 2',
+            component: <div>Item details for 2</div>,
+            id: 2,
+            closeable: true
+          },
+          {
+            tab: 'Item detail 3',
+            component: <div>Item details for 3</div>,
+            id: 3,
+            closeable: true
+          }
+        ],
+        activeIndex: 2
+      })
+    }, 2000)
+  }
 
   addItem = () => {
     const id = new Date().valueOf();
@@ -64,7 +87,7 @@ class Demo extends React.Component {
               activeIndex: newIndex
             });
           }}
-
+          noTabUnmount
           activeIndex={this.state.activeIndex}
         />
       </div>
