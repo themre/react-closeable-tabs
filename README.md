@@ -113,3 +113,6 @@ render(<Demo />, document.querySelector('#demo'));
 | tabPanelClass | String | '' | Option to add additional class to tabPanel |
 | tabContentClass | String | '' | Option to add additional class to contentPanel |
 | noTabUnmount | boolean | false | if true, all tabs will be mounted on start, will be toggled with CSS display (since version 1.1.0) |
+
+## Limitations
+This library does not work in IE11. Use polyfill for `Object.values` if you need to support it.
