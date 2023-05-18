@@ -9,13 +9,13 @@ class Demo extends React.Component {
       {
         tab: 'List',
         component: <div><h1>Your list</h1></div>,
-        id: 6,
+        id: '6',
         closeable: false
       },
       {
         tab: 'Item detail 1',
         component: <div>Item details for 1</div>,
-        id: 7,
+        id: '7',
         closeable: true
       }
     ],
@@ -29,25 +29,25 @@ class Demo extends React.Component {
           {
             tab: 'List',
             component: <div><h1>Your list</h1></div>,
-            id: 0,
+            id: '0',
             closeable: false
           },
           {
             tab: 'Item detail 1',
             component: <div>Item details for 1</div>,
-            id: 1,
+            id: '1',
             closeable: true
           },
           {
             tab: 'Item detail 2',
             component: <div>Item details for 2</div>,
-            id: 2,
+            id: '2',
             closeable: true
           },
           {
             tab: 'Item detail 3',
             component: <div>Item details for 3</div>,
-            id: 3,
+            id: '3',
             closeable: true
           }
         ],
@@ -66,7 +66,7 @@ class Demo extends React.Component {
             Your new component data for {id.toString().substring(6, 10)}
           </div>
         ),
-        id: id,
+        id: String(id),
         closeable: true
       }),
       activeIndex: this.state.data.length
