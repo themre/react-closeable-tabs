@@ -19,7 +19,11 @@
     "test:watch": "nwb test-react --server"
   },
   "dependencies": {
-    "styled-components": "^4.1.2"
+    "@types/node": "^20.2.0",
+    "@types/react": "^18.2.6",
+    "@types/react-dom": "^18.2.4",
+    "styled-components": "^4.1.2",
+    "typescript": "^5.0.4"
   },
   "devDependencies": {
     "nwb": "0.23.0",
