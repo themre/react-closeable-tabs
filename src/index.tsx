@@ -7,7 +7,7 @@ const CloseableTabs = styled.div`
 const TabContent = styled.div`
   padding: 10px;
 `
-const TabPanel = styled.div`
+const TabPanel = styled.div<{ tabPanelColor?: string }>`
   padding: 10px 10px 0;
   background: ${props => props.tabPanelColor || '#f2f2f2'};
   display: flex;
@@ -62,9 +62,41 @@ const TabPanel = styled.div`
     }
   }
 `
-class ReactCloseableTabs extends Component {
-  state = {
-    data: this.props.data,
+
+interface ReactCloseableTabsProps {
+  data?: ReactCloseableTabsData[];
+  activeIndex?: number;
+  identifier?: string;
+  onCloseTab?: (id: string, newIndex: number) => any;
+  onTabClick?: (id: string, newIndex: number, oldIndex: number) => any;
+  onBeforeTabClick?: (id: string, newIndex: number, oldIndex: number) => any;
+  tabPanelColor?: string;
+  renderClose?: any;
+  closeTitle?: string;
+  mainClassName?: string;
+  tabPanelClass?: string;
+  tabContentClass?: string;
+  noTabUnmount?: boolean;
+}
+
+interface ReactCloseableTabsData {
+  [key: string]: any;
+  tab: string;
+  component: React.ReactNode;
+  id: string;
+  closeable: boolean;
+}
+
+interface ReactCloseableTabsState {
+  data: ReactCloseableTabsData[];
+  activeIndex: number;
+  identifier: string;
+  domActived: Record<string, ReactCloseableTabsData>;
+}
+
+class ReactCloseableTabs extends Component<ReactCloseableTabsProps, ReactCloseableTabsState> {
+  state: ReactCloseableTabsState = {
+    data: this.props.data ?? [],
     activeIndex: this.props.activeIndex || 0,
     identifier: this.props.identifier || 'id',
     domActived: {}
@@ -72,8 +104,10 @@ class ReactCloseableTabs extends Component {
   componentWillMount() {
     const { domActived, activeIndex, data, identifier } = this.state;
     if (!data[activeIndex]) return;
-    let currentId = data[activeIndex][identifier];
-    domActived[currentId] = data[activeIndex];
+
+    const currentData = data[activeIndex];
+    const currentId = currentData[identifier];
+    domActived[currentId] = currentData;
     this.setState({ domActived });
   }
 
@@ -87,21 +121,22 @@ class ReactCloseableTabs extends Component {
     this.setState({ domActived })
   }
 
-  componentWillReceiveProps(nextProps) {
+  componentWillReceiveProps(nextProps: ReactCloseableTabsProps) {
     const { domActived } = this.state;
     const { data, activeIndex } = nextProps;
-    let currentId = data[activeIndex].id;
-    if (nextProps.data) {
-      domActived[currentId] = data[activeIndex];
-      const newState = { data, domActived }
+
+    if (data) {
+      const currentId = data[activeIndex ?? 0].id;
+      domActived[currentId] = data[activeIndex ?? 0];
+
       if (Number.isInteger(nextProps.activeIndex)) {
-        newState.activeIndex = nextProps.activeIndex
+        this.setState({ data, domActived, activeIndex: nextProps.activeIndex! });
       }
-      this.setState(newState)
+      this.setState({ data, domActived })
     }
   }
 
-  handleTabClick = (id, index) => {
+  handleTabClick = (id: string, index: number) => {
     const { domActived, data, identifier } = this.state;
     this.props.onBeforeTabClick &&
       this.props.onBeforeTabClick(id, index, this.state.activeIndex)
@@ -113,7 +148,7 @@ class ReactCloseableTabs extends Component {
     })
   }
 
-  closeTab = (e, id) => {
+  closeTab = (e:  React.MouseEvent<HTMLAnchorElement, MouseEvent>, id: string) => {
     e.stopPropagation()
     const activeId = this.state.data[this.state.activeIndex][
       this.state.identifier
@@ -141,6 +176,7 @@ class ReactCloseableTabs extends Component {
   render() {
     const { noTabUnmount } = this.props
     const { domActived, activeIndex, data, identifier } = this.state
+
     return (
       <CloseableTabs className={this.props.mainClassName || ''}>
         <TabPanel

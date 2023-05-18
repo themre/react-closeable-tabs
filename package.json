@@ -19,17 +19,22 @@
     "test:watch": "nwb test-react --server"
   },
   "dependencies": {
-    "styled-components": "^4.1.2"
+    "@types/node": "^20.2.0",
+    "@types/react": "^18.2.6",
+    "@types/react-dom": "^18.2.4",
+    "styled-components": "^4.1.2",
+    "typescript": "^5.0.4"
   },
   "devDependencies": {
     "nwb": "0.23.0",
     "react": "^16.6.3",
-    "react-dom": "^16.6.3"
+    "react-dom": "^16.6.3",
+    "ts-loader": "3.5.0"
   },
   "author": "themre",
   "homepage": "",
   "license": "MIT",
-  "repository": "http://github.com/themre/react-closeable-tabs",
+  "repository": "https://github.com/themre/react-closeable-tabs",
   "keywords": [
     "react-component, react, styled-components, tabs"
   ]
